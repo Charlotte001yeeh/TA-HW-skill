@@ -1,0 +1,4 @@
+interface:
+  display_name: "Homework Grading Review"
+  short_description: "Review and reconcile existing homework grading outputs."
+  default_prompt: "Review existing homework grading outputs under work/ and write audit artifacts to work/review/."

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HomeworkGradingDiscrepancy",
+  "type": "object",
+  "required": [
+    "severity",
+    "student_id",
+    "issue_type",
+    "location",
+    "explanation",
+    "suggested_action",
+    "needs_human_review"
+  ],
+  "properties": {
+    "severity": {
+      "type": "string",
+      "enum": ["INFO", "WARNING", "ERROR", "CRITICAL"]
+    },
+    "student_id": { "type": "string" },
+    "student_name": { "type": "string" },
+    "file": { "type": "string" },
+    "issue_type": {
+      "type": "string",
+      "enum": [
+        "MISSING_GRADING_JSON",
+        "MISSING_ANSWERS_JSON",
+        "MISSING_SUMMARY_ROW",
+        "DUPLICATE_STUDENT_ID",
+        "NAME_ID_MISMATCH",
+        "QUESTION_SCORE_MISMATCH",
+        "TOTAL_SCORE_MISMATCH",
+        "SCORE_OUT_OF_RANGE",
+        "MISSING_DEDUCTION_REASON",
+        "UNCLEAR_DEDUCTION_REASON",
+        "MISSING_EVIDENCE",
+        "RUBRIC_POINT_NOT_FOUND",
+        "REVIEW_QUEUE_MISSING",
+        "OCR_UNCERTAIN_NOT_FLAGGED",
+        "FINAL_REPORT_MISSING"
+      ]
+    },
+    "location": { "type": "string" },
+    "current_value": { "type": "string" },
+    "expected_value": { "type": "string" },
+    "explanation": { "type": "string" },
+    "suggested_action": { "type": "string" },
+    "needs_human_review": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

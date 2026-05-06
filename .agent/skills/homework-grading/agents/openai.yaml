@@ -1,0 +1,4 @@
+interface:
+  display_name: "Homework Grading"
+  short_description: "Grade homework submissions with auditable JSON outputs."
+  default_prompt: "Grade homework using standard answers in as/, submissions in hw/, and write validated outputs under work/."

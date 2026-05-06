@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HomeworkGradingStudentReview",
+  "type": "object",
+  "required": [
+    "student_id",
+    "source_files",
+    "total_score_from_grading",
+    "recomputed_total",
+    "score_consistency_status",
+    "identity_consistency_status",
+    "question_reviews",
+    "needs_human_review",
+    "review_status",
+    "suggested_total_score"
+  ],
+  "properties": {
+    "student_id": { "type": "string" },
+    "student_name": { "type": "string" },
+    "source_files": {
+      "type": "object",
+      "properties": {
+        "grading_json_path": { "type": "string" },
+        "answers_json_path": { "type": "string" },
+        "summary_csv_path": { "type": "string" },
+        "grades_csv_path": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "grading_json_path": { "type": "string" },
+    "answers_json_path": { "type": "string" },
+    "summary_row": { "type": ["object", "null"] },
+    "total_score_from_grading": { "type": ["number", "null"] },
+    "total_score_from_summary": { "type": ["number", "null"] },
+    "recomputed_total": { "type": ["number", "null"] },
+    "score_consistency_status": {
+      "type": "string",
+      "enum": ["PASS", "MISMATCH", "MISSING", "INVALID"]
+    },
+    "identity_consistency_status": {
+      "type": "string",
+      "enum": ["PASS", "MISMATCH", "MISSING", "UNKNOWN"]
+    },
+    "question_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "question_id",
+          "score_status",
+          "rubric_alignment_status",
+          "evidence_status",
+          "deduction_reason_status",
+          "issues"
+        ],
+        "properties": {
+          "question_id": { "type": "string" },
+          "max_score": { "type": ["number", "null"] },
+          "score_awarded": { "type": ["number", "null"] },
+          "recomputed_score": { "type": ["number", "null"] },
+          "score_status": {
+            "type": "string",
+            "enum": ["PASS", "MISMATCH", "MISSING", "OUT_OF_RANGE", "INVALID"]
+          },
+          "rubric_alignment_status": {
+            "type": "string",
+            "enum": ["PASS", "MISSING_RUBRIC_POINT", "QUESTION_NOT_IN_RUBRIC", "UNKNOWN"]
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["PASS", "WEAK", "MISSING", "UNKNOWN"]
+          },
+          "deduction_reason_status": {
+            "type": "string",
+            "enum": ["PASS", "UNCLEAR", "MISSING", "NOT_APPLICABLE"]
+          },
+          "issues": { "type": "array", "items": { "type": "string" } },
+          "suggested_fix": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "needs_human_review": { "type": "boolean" },
+    "review_status": {
+      "type": "string",
+      "enum": ["PASS", "MINOR_ISSUES", "NEEDS_FIX", "NEEDS_HUMAN_REVIEW"]
+    },
+    "review_comments": { "type": "array", "items": { "type": "string" } },
+    "suggested_total_score": { "type": ["number", "null"] },
+    "reviewer_notes": { "type": "string" }
+  },
+  "additionalProperties": true
+}

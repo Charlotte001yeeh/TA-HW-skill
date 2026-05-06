@@ -1,6 +1,6 @@
 ---
 name: homework-grading
-description: Grade student homework in a repo-local Codex workspace using as/ standard-answer PDFs, hw/ student PDF/DOCX submissions, auditable JSON intermediates, scoring-point grading, validation scripts, Markdown reports, final PDFs, summary.csv, and review_queue.csv under work/. Use for full batch grading, continuing only newly added or incomplete submissions, force-regading selected students, or regenerating rubrics where every score must be traceable and human review must be flagged for uncertain rubric, OCR, or answer alignment.
+description: Grade student homework in a repo-local Codex workspace using as/ standard-answer PDFs, hw/ student PDF/DOCX submissions, auditable JSON intermediates, scoring-point grading, validation scripts, Markdown reports, final PDFs, summary.csv, and review_queue.csv under work/. Use for full batch grading, continuing only newly added or incomplete submissions, force-regrading selected students, or regenerating rubrics where every score must be traceable and human review must be flagged for uncertain rubric, OCR, or answer alignment.
 ---
 
 # Homework Grading
@@ -43,7 +43,7 @@ Expected outputs:
 5. Split the standard answer with `scripts/split_questions.py`.
 6. Read `references/rubric_schema.json`, `references/grading_policy.md`, and the rubric extraction prompt in `references/prompt_templates.md`. Generate `work/rubric/rubric.json` from the structured extracted/split standard answer.
 7. Validate the rubric:
-   - `python .agents/skills/homework-grading/scripts/validate_rubric.py --rubric work/rubric/rubric.json --schema .agents/skills/homework-grading/references/rubric_schema.json`
+   - `python .agent/skills/homework-grading/scripts/validate_rubric.py --rubric work/rubric/rubric.json --schema .agent/skills/homework-grading/references/rubric_schema.json`
    - Stop if validation fails.
 8. Extract every student submission:
    - PDF: `extract_pdf_text.py`; if low quality, `ocr_scanned_pdf.py`.
@@ -51,14 +51,14 @@ Expected outputs:
 9. Split each student answer with `scripts/split_questions.py`, align it to rubric `question_id`s, and write `work/answers/{student_id}.answers.json` conforming to `references/answers_schema.json`.
 10. Grade each student question by question using `references/grading_policy.md` and the question grading prompt. Every result must score each rubric scoring point and cite student evidence.
 11. Write `work/grading/{student_id}.grading.json`, then validate it:
-    - `python .agents/skills/homework-grading/scripts/validate_grading.py --grading work/grading/{student_id}.grading.json --rubric work/rubric/rubric.json --schema .agents/skills/homework-grading/references/grading_schema.json`
+    - `python .agent/skills/homework-grading/scripts/validate_grading.py --grading work/grading/{student_id}.grading.json --rubric work/rubric/rubric.json --schema .agent/skills/homework-grading/references/grading_schema.json`
     - Stop for that student if validation fails.
 12. Render each student report:
-    - `python .agents/skills/homework-grading/scripts/render_report.py --grading work/grading/{student_id}.grading.json --output work/reports/{student_id}.report.md`
+    - `python .agent/skills/homework-grading/scripts/render_report.py --grading work/grading/{student_id}.grading.json --output work/reports/{student_id}.report.md`
 13. Render each student's final readable PDF from validated grading JSON:
-    - `python .agents/skills/homework-grading/scripts/render_final_pdf.py --grading work/grading/{student_id}.grading.json --output work/final/{student_id}.final.pdf`
+    - `python .agent/skills/homework-grading/scripts/render_final_pdf.py --grading work/grading/{student_id}.grading.json --output work/final/{student_id}.final.pdf`
 14. Update class summaries:
-    - `python .agents/skills/homework-grading/scripts/update_summary.py --grading-dir work/grading --report-dir work/reports --rubric work/rubric/rubric.json --schema .agents/skills/homework-grading/references/grading_schema.json`
+    - `python .agent/skills/homework-grading/scripts/update_summary.py --grading-dir work/grading --report-dir work/reports --rubric work/rubric/rubric.json --schema .agent/skills/homework-grading/references/grading_schema.json`
 
 ## Command Semantics
 
@@ -304,3 +304,4 @@ Do not paste full grading reports into the chat unless the user explicitly asks.
 - `references/rubric_schema.json`, `answers_schema.json`, `grading_schema.json`: Required output schemas.
 - `references/grading_policy.md`: Detailed grading policy.
 - `references/prompt_templates.md`: Strict-JSON prompt templates for Codex-assisted extraction, alignment, grading, verification, and reports.
+
