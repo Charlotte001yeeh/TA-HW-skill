@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Student Grading",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["student_id", "student_name", "total_score", "results"],
+  "properties": {
+    "student_id": { "type": "string", "minLength": 1 },
+    "student_name": { "type": ["string", "null"] },
+    "total_score": { "type": "number", "minimum": 0 },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "question_id",
+          "max_score",
+          "score",
+          "scoring_details",
+          "final_reason",
+          "needs_human_review",
+          "review_reason"
+        ],
+        "properties": {
+          "question_id": { "type": "string", "minLength": 1 },
+          "max_score": { "type": "number", "minimum": 0 },
+          "score": { "type": "number", "minimum": 0 },
+          "scoring_details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["point_id", "max_score", "score_awarded", "reason", "evidence"],
+              "properties": {
+                "point_id": { "type": "string", "minLength": 1 },
+                "max_score": { "type": "number", "minimum": 0 },
+                "score_awarded": { "type": "number", "minimum": 0 },
+                "reason": { "type": "string" },
+                "evidence": { "type": "string" }
+              }
+            }
+          },
+          "final_reason": { "type": "string" },
+          "needs_human_review": { "type": "boolean" },
+          "review_reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}

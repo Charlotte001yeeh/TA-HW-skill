@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Homework Rubric",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["assignment_id", "total_score", "questions"],
+  "properties": {
+    "assignment_id": { "type": "string", "minLength": 1 },
+    "total_score": { "type": "number", "minimum": 0 },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["question_id", "title", "max_score", "standard_solution", "rubric_source", "needs_teacher_review", "scoring_points"],
+        "properties": {
+          "question_id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string" },
+          "max_score": { "type": "number", "minimum": 0 },
+          "standard_solution": { "type": "string" },
+          "rubric_source": { "type": "string", "enum": ["explicit_from_answer_key", "inferred_from_solution", "teacher_provided", "mixed"] },
+          "needs_teacher_review": { "type": "boolean" },
+          "scoring_points": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["point_id", "description", "score", "equivalent_conditions"],
+              "properties": {
+                "point_id": { "type": "string", "minLength": 1 },
+                "description": { "type": "string", "minLength": 1 },
+                "score": { "type": "number", "minimum": 0 },
+                "equivalent_conditions": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

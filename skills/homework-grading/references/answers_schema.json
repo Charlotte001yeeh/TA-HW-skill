@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Student Answers",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["student_id", "student_name", "source_file", "answers"],
+  "properties": {
+    "student_id": { "type": "string", "minLength": 1 },
+    "student_name": { "type": ["string", "null"] },
+    "source_file": { "type": "string", "minLength": 1 },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "question_id",
+          "answer_text",
+          "source_pages",
+          "source_snippet",
+          "alignment_confidence",
+          "extraction_confidence",
+          "needs_human_review",
+          "review_reason"
+        ],
+        "properties": {
+          "question_id": { "type": "string", "minLength": 1 },
+          "answer_text": { "type": "string" },
+          "source_pages": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 1 }
+          },
+          "source_snippet": { "type": "string" },
+          "alignment_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "extraction_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "needs_human_review": { "type": "boolean" },
+          "review_reason": { "type": "string" }
+        }
+      }
+    }
+  }
+}
