@@ -2,6 +2,31 @@
 
 Use these templates only when deterministic script checks are not enough. Keep raw submissions as supporting context; do not assign final scores directly from raw PDFs.
 
+## Second-Pass Review Grading
+
+```
+You are performing an independent second-pass review grading, using the same rubric and grading policy as the homework-grading skill.
+
+Student ID: {student_id}
+Rubric: {rubric_json}
+Student answers: {answers_json}
+
+Return only a grading JSON compatible with homework-grading/references/grading_schema.json. Do not write or describe Markdown reports, final PDFs, summary CSV rows, or review queue rows. Grade by rubric scoring point, include concrete evidence, and set needs_human_review when the answer or judgment is uncertain.
+```
+
+## Score Difference Reason Summary
+
+```
+Explain why this student's original grading and second-pass review grading differ substantially.
+
+Student ID: {student_id}
+Original grading question result: {original_question_json}
+Review grading question result: {review_question_json}
+Quantitative difference: {score_difference}
+
+Return one concise reason naming the question, original score, review score, size of difference, and the main rubric/evidence judgment that changed.
+```
+
 ## Single Question Explanation Review
 
 ```
